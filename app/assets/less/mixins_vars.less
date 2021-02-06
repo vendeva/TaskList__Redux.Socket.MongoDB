@@ -1,0 +1,70 @@
+@darkbody: #1a212b;
+@darkblue: #1b313f;
+@focus_input: #032b44;
+@blue: #4789b3;
+@bright_blue: #0091ec;
+@light: #e6fdf8;
+@turquoise: #77f5dd;
+@turquoise_text: #77def5;
+@duration: 0.8s;
+
+@bold: "BebasNeueBold", sans-serif;
+@thin: "BebasNeueRegular", sans-serif;
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-items {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.text(@font, @color) {
+  font-family: @font;
+  color: @color;
+}
+
+.size(@width, @height) {
+  width: @width;
+  height: @height;
+}
+
+.position {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.top-alignment {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.scrollbar {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: @blue transparent;
+
+  &::-webkit-scrollbar {
+    appearance: none;
+    width: 1px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: @blue;
+    display: none;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    display: block;
+  }
+}

@@ -1,0 +1,322 @@
+.task {
+  &__container {
+    .flex-column;
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: @darkblue;
+    border: 1px solid @blue;
+    padding: 0 30px;
+
+    &_padding {
+      padding-bottom: 100px;
+    }
+  }
+
+  &__header {
+    margin: 30px 0px 40px;
+  }
+
+  &__h1 {
+    margin-bottom: 30px;
+  }
+
+  &__info {
+    .flex-between;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__check {
+    cursor: pointer;
+    position: relative;
+  }
+
+  &__clear:hover {
+    cursor: pointer;
+    color: @light;
+    transition: all 0.8s ease-in-out;
+  }
+
+  &__main {
+    margin-top: 30px;
+    border-top: 3px solid @turquoise;
+    overflow: auto;
+    .scrollbar;
+  }
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  font-size: 18px;
+  color: @light;
+  padding: 5px 20px;
+  background: no-repeat bottom, 50% calc(100% - 1px);
+  background-image: linear-gradient(
+      0deg,
+      @bright_blue 2px,
+      rgba(156, 39, 176, 0) 0
+    ),
+    linear-gradient(0deg, @light 1px, hsla(0, 0%, 82%, 0) 0);
+  background-size: 0% 100%, 100% 100%;
+  border: 0px;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease-in;
+  outline: none;
+
+  &::placeholder {
+    color: @light;
+  }
+
+  &:focus {
+    background-size: 100% 100%, 100% 100%;
+    background-color: @light;
+    color: @focus_input;
+
+    &::placeholder {
+      color: @blue;
+    }
+  }
+}
+
+.input-check {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+
+  + label {
+    position: absolute;
+    cursor: pointer;
+    .top-alignment;
+    bottom: 0;
+    left: 0;
+    .size(40px, 40px);
+    z-index: 3;
+  }
+
+  &:checked {
+    ~ .item-task__text {
+      transition-delay: 0s;
+      opacity: 0.5;
+    }
+
+    ~ .icon-check {
+      .icon-check {
+        &__box {
+          stroke-dashoffset: 56.1053;
+          transition-delay: 0s;
+        }
+
+        &__line {
+          stroke-dashoffset: -8;
+        }
+
+        &__yes {
+          stroke-dashoffset: 0;
+          transition-delay: @duration * 0.6;
+        }
+
+        &__circle {
+          animation-name: explode;
+        }
+      }
+    }
+  }
+}
+
+.icon-check {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  margin: auto;
+  fill: none;
+  stroke: @turquoise;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+
+  &_size {
+    width: 40px;
+  }
+
+  &__line,
+  &__box,
+  &__yes {
+    transition: stroke-dashoffset @duration cubic-bezier(0.9, 0, 0.5, 1);
+  }
+
+  &__circle {
+    stroke: @turquoise;
+    stroke-dasharray: 1 6;
+    stroke-width: 0;
+
+    transform-origin: 13.5px 12.5px;
+    transform: scale(0.4) rotate(0deg);
+    animation: none @duration linear;
+
+    @keyframes explode {
+      30% {
+        stroke-width: 3;
+        stroke-opacity: 1;
+        transform: scale(0.8) rotate(40deg);
+      }
+
+      100% {
+        stroke-width: 0;
+        stroke-opacity: 0;
+        transform: scale(1.1) rotate(60deg);
+      }
+    }
+  }
+
+  &__box {
+    stroke-dasharray: 56.1053, 56.1053;
+    stroke-dashoffset: 0;
+    transition-delay: @duration * 0.2;
+  }
+
+  &__yes {
+    stroke: @turquoise;
+    stroke-dasharray: 9.8995, 9.8995;
+    stroke-dashoffset: 9.8995;
+    transition-duration: @duration * 0.4;
+  }
+
+  &__line {
+    stroke-dasharray: 450, 1684;
+    stroke-dashoffset: 450;
+  }
+
+  &__circle {
+    animation-delay: @duration * 0.7;
+    animation-duration: @duration * 0.7;
+  }
+}
+
+.links {
+  .flex-between;
+  min-width: 50%;
+  align-self: flex-end;
+
+  &__item:hover {
+    color: @light;
+    transition: all 0.8s ease-in-out;
+  }
+
+  .links__item_active {
+    color: @turquoise;
+    border-bottom: 2px solid @turquoise;
+  }
+}
+
+.item-task {
+  border-bottom: 3px solid @turquoise;
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__input {
+    position: relative;
+    padding: 0 20px 0 40px;
+    transition: all 0.8s ease-out;
+  }
+
+  &__input_open {
+    padding-top: 30px;
+    transition: all 0.8s ease-out;
+  }
+
+  &__down {
+    .position;
+    .size(15px, 15px);
+    background: url("../img/down_arrow.svg");
+    background-size: 100%;
+    z-index: 1;
+    top: 10px;
+  }
+
+  &__up {
+    .position;
+    .size(15px, 15px);
+    background: url("../img/up_arrow.svg");
+    background-size: 100%;
+    z-index: 1;
+    top: 10px;
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__text {
+    padding: 20px 20px 20px 60px;
+    transition: all 0.4s linear 0.4s;
+    color: @turquoise_text;
+    font-size: 16px;
+    min-height: 70px;
+    .flex-items;
+  }
+
+  &__close {
+    opacity: 0.1;
+    .position;
+    .size(20px, 20px);
+    .top-alignment;
+    right: 20px;
+    background: url("../img/close.svg");
+    background-size: 100%;
+  }
+
+  &__close:hover {
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+  }
+
+  &__plus {
+    .position;
+    .size(15px, 15px);
+    background: url("../img/plus.svg");
+    background-size: 100%;
+    bottom: 10px;
+  }
+
+  &__minus {
+    .position;
+    .size(15px, 15px);
+    background: url("../img/minus.svg");
+    background-size: 100%;
+    bottom: 10px;
+  }
+
+  &__subtasks {
+    border-top: none;
+    padding-left: 50px;
+    max-height: 0;
+    transition: all 0.8s ease-out;
+    .scrollbar;
+
+    &_open {
+      border-top: 1px solid @blue;
+      max-height: 300px;
+      transition: all 0.8s ease-in;
+    }
+
+    .item-task__content:not(:nth-child(1)) {
+      border-top: 1px solid @blue;
+    }
+  }
+}
